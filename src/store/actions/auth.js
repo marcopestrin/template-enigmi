@@ -23,6 +23,10 @@ export const auth = (email, password, isSignUp) => {
           .catch(err => {
               console.log(err)
           })
+            
+
+    console.log("aaa");
 
     }
+
 }

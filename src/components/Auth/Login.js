@@ -1,8 +1,10 @@
 import React, { Component }     from 'react';
-import { Redirect }             from 'react-router-dom';
+import {connect}                from 'react-redux';
 import fire                     from '../../config/Fire';
 import Button                   from '../UI/Button/Button';
 import Aux                      from "../../hoc/Aux";
+import * as actions             from '../../store/actions/index';
+
 
 class Login extends Component {
   constructor(props) {
@@ -12,9 +14,11 @@ class Login extends Component {
     this.signup = this.signup.bind(this);
     this.isSignUp = true
     this.state = {
+        isSignUp : false,
         email: '',
         password: ''
     };
+    console.log(this.signup);
   }
 
   handleChange(e) {
@@ -23,27 +27,38 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    console.log("isSignUp",this.state.isSignUp);
       if(this.state.isSignUp) {
-          console.log("REGISTRAZIØNE");
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then((u)=>{
-                console.log(u)
+            .then((result)=>{
+                console.log(result)
+                this.state.auth = result;
+                this.props.history.push({
+                    pathname:"/", 
+                    state: {
+                        login:false
+                    }
+                });            
             })
             .catch((error) => {
                 console.log(error);
             })
       }else{
-        console.log("ACCEDI");
-
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then((u)=>{
-                console.log(u);
+            .then((result)=>{
+                console.log(result);
+                this.state.auth = result;
+                this.props.history.push({
+                    pathname:"/", 
+                    state: {
+                        login: true
+                    }
+                });
             })
             .catch((error) => {
                 console.log(error);
             });
       }
+
   }
 
   signup(e){
@@ -51,6 +66,7 @@ class Login extends Component {
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
     .then((u)=>{
         console.log(u)
+        this.props.onAuth(this.state.email, this.state.password,this.state.isSignUp);
     })
     .catch((error) => {
         console.log(error);
@@ -59,7 +75,6 @@ class Login extends Component {
 
   switchAuthModeHandler = (e) => {
     e.preventDefault();
-      console.log("enttrato in switch");
     this.setState(prevState => {
       return {isSignUp:!prevState.isSignUp}
     });
@@ -79,7 +94,7 @@ class Login extends Component {
                 <Button 
                     clicked={this.login}
                     btnType="classic">
-                    INVIA MODULO
+                    SEND MODULE
                 </Button>
                 <Button 
                     clicked={this.switchAuthModeHandler}
@@ -91,4 +106,14 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+
+const mapStateToProps = state => {
+    return {
+    }
+  }
+  const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email,password,isSignUp) => dispatch(actions.auth(email,password,isSignUp))
+    };
+  }
+export default connect(mapDispatchToProps,mapStateToProps)(Login);

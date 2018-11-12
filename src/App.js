@@ -40,7 +40,7 @@ class App extends Component {
             <Switch>
                 <Route path='/logout' component={Logout}  />
                 <Route path='/register' component={Register} />
-                <Route path='/login' component={Login} />
+                <Route path='/auth' component={Login} />
                 <Route path='/' exact component={Layout}  />
                 <Redirect to="/" />
             </Switch>
@@ -54,4 +54,5 @@ class App extends Component {
         )
     }
 }
+
 export default withRouter(App);
