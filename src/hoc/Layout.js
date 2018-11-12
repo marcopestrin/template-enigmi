@@ -3,29 +3,35 @@ import {connect}                      from 'react-redux';
 import EnigmaPage                     from '../containers/EnigmaPage/EnigmaPage';
 import SideDrawer                     from '../components/UI/SideDrawer/SideDrawer';
 import Aux                            from './Aux';
-import fire                           from '../config/Fire.js';
+import NavigationItems from '../components/UI/NavigationItems/NavigationItems';
 
 class Layout extends Component {
 
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);  
-        console.log("constructor - layout.js ",this);
      }
-
-    componentDidMount(){
-        console.log("componentDidMount - layout.js - login: ",this.props.location.state );
-    }
 
     logout() {
         this.props.history.push("/logout")
     }
 
     render() {
+
+        var auth;
+        var isAuthenticated;
+        if(this.props.location.state.login) {
+            //sono loggato
+            isAuthenticated = true;
+        }else{
+            //non sono loggato
+            isAuthenticated = false;
+        }
+        auth = <NavigationItems isAuthenticated={isAuthenticated} />;
+
         return(
             <Aux>
-                <button onClick={this.logout}>Logout</button>
-                <SideDrawer />
+                {auth}
                 <h2>layout</h2>
                 <EnigmaPage />
                 <h2>layout</h2>

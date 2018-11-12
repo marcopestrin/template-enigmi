@@ -9,10 +9,10 @@ class EnigmaPage extends Component {
     componentDidMount(){
         Axios.get("/enigmi.json")
             .then(response => {
-                console.log(response);
+//                console.log(response);
             })
             .catch(err => {
-                console.log(err)
+  //              console.log(err)
             })
     }
 
