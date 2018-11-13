@@ -21,13 +21,29 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  createNewProfile(id) {
+    var levelStart = 1;
+    fire.database().ref("user/").push({
+        id,
+        levelStart
+    })
+        .then((data)=>{
+            console.log("createNewProfile",data);
+        })
+        .catch((error)=>{
+            console.log("createNewProfile",error);
+        })
+  }
+
   login(e) {
     e.preventDefault();
       if(this.state.isSignUp) {
+        console.log("createUserWithEmailAndPassword");
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((result)=>{
                 console.log(result)
                 this.state.auth = result;
+                this.createNewProfile(result.user.uid);
                 this.props.history.push({
                     pathname:"/", 
                     state: {
@@ -39,6 +55,7 @@ class Login extends Component {
                 console.log(error);
             })
       }else{
+        console.log("signInWithEmailAndPassword");
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((result)=>{
                 console.log(result);
@@ -53,7 +70,7 @@ class Login extends Component {
             .catch((error) => {
                 console.log(error);
             });
-      }
+    }
 
   }
 
