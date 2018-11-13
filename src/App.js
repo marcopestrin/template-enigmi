@@ -3,7 +3,6 @@ import {Route,Switch,withRouter,Redirect}      from 'react-router-dom';
 import fire                           from './config/Fire';
 import Layout                         from './hoc/Layout';
 import Aux                            from './hoc/Aux';
-import EnigmaPage                     from './containers/EnigmaPage/EnigmaPage'
 import Logout                         from './components/Auth/Logout';
 import Register                       from './components/Auth/Register';
 import Login                          from './components/Auth/Login';
@@ -24,7 +23,7 @@ class App extends Component {
 
     authListener() {
         fire.auth().onAuthStateChanged((user) => {
-          console.log(user);
+          console.log("----------->authListener<--------------- ",user);
           if (user) {
             this.setState({ user });
             localStorage.setItem('user', user.uid);

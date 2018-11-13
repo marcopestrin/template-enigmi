@@ -1,25 +1,27 @@
 import React, { Component }           from 'react';
 import {connect}                      from 'react-redux';
 import EnigmaPage                     from '../containers/EnigmaPage/EnigmaPage';
-import SideDrawer                     from '../components/UI/SideDrawer/SideDrawer';
 import Aux                            from './Aux';
-import NavigationItems from '../components/UI/NavigationItems/NavigationItems';
+import NavigationItems                from '../components/UI/NavigationItems/NavigationItems';
 
 class Layout extends Component {
 
     constructor(props) {
         super(props);
-        this.logout = this.logout.bind(this);  
-     }
+        this.logout = this.logout.bind(this); 
+        this.state = {
+            login:false
+        } 
+    }
 
     logout() {
         this.props.history.push("/logout")
     }
 
     render() {
-
         var auth;
         var isAuthenticated;
+        
         if(this.props.location.state.login) {
             //sono loggato
             isAuthenticated = true;
@@ -27,6 +29,8 @@ class Layout extends Component {
             //non sono loggato
             isAuthenticated = false;
         }
+        
+        
         auth = <NavigationItems isAuthenticated={isAuthenticated} />;
 
         return(

@@ -1,10 +1,7 @@
 import React, { Component }     from 'react';
-import {connect}                from 'react-redux';
 import fire                     from '../../config/Fire';
 import Button                   from '../UI/Button/Button';
 import Aux                      from "../../hoc/Aux";
-import * as actions             from '../../store/actions/index';
-
 
 class Login extends Component {
   constructor(props) {
@@ -18,7 +15,6 @@ class Login extends Component {
         email: '',
         password: ''
     };
-    console.log(this.signup);
   }
 
   handleChange(e) {
@@ -107,13 +103,4 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
-    return {
-    }
-  }
-  const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (email,password,isSignUp) => dispatch(actions.auth(email,password,isSignUp))
-    };
-  }
-export default connect(mapDispatchToProps,mapStateToProps)(Login);
+export default Login;
