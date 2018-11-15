@@ -3,15 +3,21 @@ import {connect}                      from 'react-redux';
 import EnigmaPage                     from '../containers/EnigmaPage/EnigmaPage';
 import Aux                            from './Aux';
 import NavigationItems                from '../components/UI/NavigationItems/NavigationItems';
+import fire                           from '../config/Fire';
 
 class Layout extends Component {
 
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this); 
-        this.state = {
-            login:false
-        } 
+
+        fire.auth().onAuthStateChanged((user) => {
+            if (user) {
+              this.setState({ id: user.uid, authenticated: true });
+            } else {
+              this.setState({authenticated: false });
+            }
+          });
     }
 
     logout() {
@@ -31,7 +37,7 @@ class Layout extends Component {
         }
         
         
-        auth = <NavigationItems isAuthenticated={isAuthenticated} />;
+        auth = <NavigationItems isAuthenticated={this.state.isAuthenticated} />;
 
         return(
             <Aux>
