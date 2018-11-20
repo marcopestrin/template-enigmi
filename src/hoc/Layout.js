@@ -9,7 +9,13 @@ class Layout extends Component {
 
     constructor(props) {
         super(props);
-        this.logout = this.logout.bind(this); 
+        this.state = {}
+        this.logout = this.logout.bind(this);
+        this.isAuthenticated = this.isAuthenticated.bind(this);
+
+        if(!this.props.isAuthenticated) {
+            this.setState({authenticated: false });
+        }
 
         fire.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -17,27 +23,22 @@ class Layout extends Component {
             } else {
               this.setState({authenticated: false });
             }
-          });
+        });
     }
 
     logout() {
         this.props.history.push("/logout")
+        //DEVO RIMUOVERE IL FLAG NELLO STATO IN LOGOUT!!!
+    }
+
+    isAuthenticated(){
+        return this.state.authenticated;
     }
 
     render() {
         var auth;
-        var isAuthenticated;
         
-        if(this.props.location.state.login) {
-            //sono loggato
-            isAuthenticated = true;
-        }else{
-            //non sono loggato
-            isAuthenticated = false;
-        }
-        
-        
-        auth = <NavigationItems isAuthenticated={this.state.isAuthenticated} />;
+        auth = <NavigationItems isAuthenticated={this.isAuthenticated()} />;
 
         return(
             <Aux>

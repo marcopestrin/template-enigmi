@@ -8,7 +8,9 @@ class Logout extends Component {
         this.props.history.push({
             pathname:"/", 
             state: {
-                login: false
+                state: {
+                    authenticated: false
+                }
             }
         });
     }
