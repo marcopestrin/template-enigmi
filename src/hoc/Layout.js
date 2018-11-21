@@ -44,7 +44,7 @@ class Layout extends Component {
             <Aux>
                 {auth}
                 <h2>layout</h2>
-                <EnigmaPage />
+                <EnigmaPage user={this.state.uid}/>
                 <h2>layout</h2>
             </Aux>
         )

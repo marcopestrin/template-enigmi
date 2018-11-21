@@ -21,12 +21,10 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  createNewProfile(id) {
-    var levelStart = 1;
-    fire.database().ref("user/").push({
-        id,
-        levelStart
-    })
+  createNewProfile(id,email) {
+    var timestamp = new Date().getTime();
+    var currentLevel = 1;
+    fire.database().ref("user/").push({id,email,timestamp,currentLevel})
         .then((data)=>{
             console.log("createNewProfile",data);
         })
@@ -43,7 +41,7 @@ class Login extends Component {
             .then((result)=>{
                 console.log(result)
                 this.state.auth = result;
-                this.createNewProfile(result.user.uid);
+                this.createNewProfile(result.user.uid, result.user.email);
                 this.props.history.push({
                     pathname:"/", 
                     state: {

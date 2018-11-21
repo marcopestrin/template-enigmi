@@ -10,13 +10,14 @@ class EnigmaPage extends Component {
         super(props);
         this.readUserData();
 
-        console.log(this.state);
+        console.log("props enigmapage",props);
     }
 
     readUserData() {
         fire.database().ref('enigmi/').once('value')
             .then(function(result){
-                console.log(result.val());
+                console.log("--->>>>",result.val());
+                return result.val()
             });
     }
 
@@ -24,7 +25,7 @@ class EnigmaPage extends Component {
         return (
             <div className={classes.EnigmaPage}>aaa
                 <div className={classes.Header}>
-                    <div><LevelInfo /></div>
+                    <div><LevelInfo readUserData={this.readUserData()}/></div>
                     <div><Password /></div>
                 </div>
                 <Enigma /> aaa
