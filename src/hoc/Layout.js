@@ -3,7 +3,8 @@ import {connect}                      from 'react-redux';
 import EnigmaPage                     from '../containers/EnigmaPage/EnigmaPage';
 import Aux                            from './Aux';
 import NavigationItems                from '../components/UI/NavigationItems/NavigationItems';
-import fire                           from '../config/Fire';
+import * as actions                   from '../store/actions';
+
 
 class Layout extends Component {
 
@@ -11,11 +12,14 @@ class Layout extends Component {
         super(props);
         this.state = {}
         this.logout = this.logout.bind(this);
-        this.isAuthenticated = this.isAuthenticated.bind(this);
-
+        this.props.authCheckState();
+        this.isAuthenticated();
+        //this.isAuthenticated = this.isAuthenticated.bind(this);
+        /*
         if(!this.props.isAuthenticated) {
             this.setState({authenticated: false });
         }
+
 
         fire.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -24,6 +28,11 @@ class Layout extends Component {
               this.setState({authenticated: false });
             }
         });
+        */
+    }
+
+    componentDidMount() {
+        console.log("pes: ",this.props.isAuthenticated);
     }
 
     logout() {
@@ -31,15 +40,21 @@ class Layout extends Component {
         //DEVO RIMUOVERE IL FLAG NELLO STATO IN LOGOUT!!!
     }
 
+    getCookieValue = (a) => {
+        var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+        return b ? b.pop() : '';
+    }
+
     isAuthenticated(){
-        return this.state.authenticated;
+        if(this.getCookieValue("authEnigmi")) {
+            return true
+        }
+        return this.props.isAuthenticated
     }
 
     render() {
         var auth;
-        
         auth = <NavigationItems isAuthenticated={this.isAuthenticated()} />;
-
         return(
             <Aux>
                 {auth}
@@ -53,8 +68,13 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated:state.auth != null
-    }
+        isAuthenticated:state.isAuthenticated
+    };
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        authCheckState: () => dispatch(actions.authCheckState()),
+    };
 }
 
-export default connect(mapStateToProps)(Layout);
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

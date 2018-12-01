@@ -1,21 +1,26 @@
 import React, { Component }           from 'react';
-import fire                           from '../../config/Fire';
+import {connect}                      from 'react-redux';
+import * as actions                   from '../../store/actions';
 
 class Logout extends Component {
-    componentDidMount(){
-        fire.auth().signOut();
-        console.log("auth in logout.js:",fire.auth());
-        this.props.history.push({
-            pathname:"/", 
-            state: {
-                state: {
-                    authenticated: false
-                }
-            }
-        });
+    componentDidMount(props){
+        this.props.logout();
     }
+
     render() {
         return(<h1>Logout</h1>)
     }
 }
-export default Logout;
+
+const mapStateToProps = state => {
+    return {
+
+    };
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(actions.logout())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);

@@ -1,11 +1,14 @@
 import React, {Component}             from 'react';
 import {Route,Switch,withRouter,Redirect}      from 'react-router-dom';
+import {connect}                      from 'react-redux';
 import fire                           from './config/Fire';
 import Layout                         from './hoc/Layout';
 import Aux                            from './hoc/Aux';
+import history                        from './hoc/History';
 import Logout                         from './components/Auth/Logout';
-import Register                       from './components/Auth/Register';
-import Login                          from './components/Auth/Login';
+import Login                          from './components/Auth/Login'
+import * as actions                   from './store/actions/index' ;
+
 
 class App extends Component {
 
@@ -36,10 +39,9 @@ class App extends Component {
     render() {
         var routes = (
             <Switch>
-                <Route path='/logout' component={Logout}  />
-                <Route path='/register' component={Register} />
-                <Route path='/auth' component={Login} />
-                <Route path='/' exact component={Layout}  />
+                <Route history = {history} path='/logout' component={Logout}  />
+                <Route history = {history} path='/auth' component={Login} />
+                <Route history = {history} path='/' exact component={Layout}  />
                 <Redirect to="/" />
             </Switch>
         );
@@ -53,4 +55,15 @@ class App extends Component {
     }
 }
 
-export default withRouter(App);
+const mapDispatchToProps = dispatch => {
+    return {
+        authCheckState: () => dispatch(actions.authCheckState())
+    };
+}
+const mapStateToProps = state => {
+    return {
+
+    }
+}
+
+  export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App));

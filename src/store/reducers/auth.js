@@ -1,18 +1,44 @@
-import * as actions from '../actions/actionType.js';
-import {updateObject}       from '../utility';
+import * as actionTypes from '../actions/actionType';
 
-
-const initialState  = {}
+const initialState = {
+    isAuthenticated: false,
+    level:1,
+    fetched:false,
+    fetching:false,
+    error:null,
+    registrationSuccess:null
+}
 
 const reducer = (state = initialState,action) => {
     switch(action.type){
 
-        case actions.AUTH_START:
-            return updateObject(state, {error:null, loading:true});
+        case actionTypes.AUTH_LOADING:
+            return {...state, fetching:true};
+
+        case actionTypes.AUTH_CHECK:
+            return {...state};
+
+        case actionTypes.AUTH_SUCCESS:
+            return {...state, isAuthenticated:true, fetching:false, registrationSuccess:null, error:false};
+
+        case actionTypes.AUTH_FAIL:
+            return {...state, isAuthenticated:false, error:true, fetching:false,registrationSuccess:null};
+
+        case actionTypes.REGISTRATION_LOADING:
+            return {...state, fetching:true};
+
+        case actionTypes.REGISTRATION_SUCCESS:
+            return {...state, registrationSuccess:true, fetching:false, error:false};
+
+        case actionTypes.REGISTRATION_FAIL:
+            return {...state, registrationSuccess:false, error:true, fetching:false};
+
+        case actionTypes.LOGOUT:
+            return {...state, isAuthenticated:false, error:false};
 
         default:
             return state;
     }
 }
 
-export default reducer
+export default reducer;

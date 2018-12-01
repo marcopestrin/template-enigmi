@@ -1,100 +1,46 @@
-import React, { Component }     from 'react';
-import fire                     from '../../config/Fire';
-import Button                   from '../UI/Button/Button';
-import Aux                      from "../../hoc/Aux";
+import React, { Component }             from 'react';
+import {connect}                        from 'react-redux';
+import Button                           from '../UI/Button/Button';
+import Aux                              from "../../hoc/Aux";
+import * as actions                     from '../../store/actions';
+
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.login = this.login.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.signup = this.signup.bind(this);
-    this.isSignUp = true
-    this.state = {
-        isSignUp : false,
-        email: '',
-        password: ''
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.isSignUp = true
+        this.state = {
+            isSignUp : false,
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  createNewProfile(id,email) {
-    var timestamp = new Date().getTime();
-    var currentLevel = 1;
-    fire.database().ref("user/").push({id,email,timestamp,currentLevel})
-        .then((data)=>{
-            console.log("createNewProfile",data);
-        })
-        .catch((error)=>{
-            console.log("createNewProfile",error);
-        })
-  }
-
-  login(e) {
-    e.preventDefault();
-      if(this.state.isSignUp) {
-        console.log("createUserWithEmailAndPassword");
-        fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then((result)=>{
-                console.log(result)
-                this.state.auth = result;
-                this.createNewProfile(result.user.uid, result.user.email);
-                this.props.history.push({
-                    pathname:"/", 
-                    state: {
-                        login:false
-                    }
-                });            
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-      }else{
-        console.log("signInWithEmailAndPassword");
-        fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then((result)=>{
-                console.log(result);
-                this.state.auth = result;
-                this.props.history.push({
-                    pathname:"/", 
-                    state: {
-                        login: true
-                    }
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        };
     }
 
-  }
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
 
-  signup(e){
-    e.preventDefault();
-    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-    .then((u)=>{
-        console.log(u)
-        this.props.onAuth(this.state.email, this.state.password,this.state.isSignUp);
-    })
-    .catch((error) => {
-        console.log(error);
-      })
-  }
+    submitHandlerRegister=(e)=>{
+        e.preventDefault()
+        this.props.createNewProfile(this.state.email,this.state.password)
+    }
 
-  switchAuthModeHandler = (e) => {
-    e.preventDefault();
-    this.setState(prevState => {
-      return {isSignUp:!prevState.isSignUp}
-    });
-  }
+    submitHandlerAuthentication=(e)=>{
+        e.preventDefault()
+        this.props.login(this.state.email,this.state.password)
+    }
+
+    switchAuthModeHandler = (e) => {
+        e.preventDefault();
+        this.setState(prevState => {
+            return {isSignUp:!prevState.isSignUp}
+        });
+    }
 
   render() {
     return (
         <Aux>
-            <h1>{this.state.isSignUp ? 'Registrati' : 'Accedi'}</h1>
+            <h1>{this.state.isSignUp ? 'Registration' : 'Login'}</h1>
             <form>
                 <label for="email1">Email address</label>
                 <input value={this.state.email} onChange={this.handleChange} type="email" name="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter email" />
@@ -103,14 +49,14 @@ class Login extends Component {
                 <input value={this.state.password} onChange={this.handleChange} type="password" name="password" id="password1" placeholder="Password" />
 
                 <Button 
-                    clicked={this.login}
+                    clicked={this.state.isSignUp ? this.submitHandlerRegister : this.submitHandlerAuthentication}
                     btnType="classic">
                     SEND MODULE
                 </Button>
                 <Button 
                     clicked={this.switchAuthModeHandler}
                     btnType="classic">
-                    SWITCH TO {!this.state.isSignUp ? 'Registrati' : 'Accedi'}
+                    SWITCH TO {!this.state.isSignUp ? 'Registration' : 'Login'}
                 </Button>
             </form>
         </Aux>
@@ -118,4 +64,16 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => {
+    return {
+
+    };
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        createNewProfile: (email,password) => dispatch(actions.createNewProfile(email,password)),
+        login: (email,password) =>  dispatch(actions.authentication(email,password)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

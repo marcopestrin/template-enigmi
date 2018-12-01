@@ -1,4 +1,9 @@
-export const AUTH_REGISTER = 'AUTH_REGISTER';
-export const AUTH_LOGIN = 'AUTH_LOGIN';
-export const AUTH_START = 'AUTH_START';
+export const AUTH_LOADING = 'AUTH_LOADING';
+export const AUTH_CHECK = 'AUTH_CHECK';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';
+export const REGISTRATION_LOADING = 'REGISTRATION_LOADING';
+export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
+export const REGISTRATION_FAIL = 'REGISTRATION_FAIL';
+export const LOGOUT = 'LOGOUT';
 
