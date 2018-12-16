@@ -8,7 +8,7 @@ import logger                   from 'redux-logger';
 import thunk                    from 'redux-thunk';
 import promise                  from 'redux-promise-middleware'
 import App                      from './App';
-import reducer                  from './store/reducers/auth';
+import reducer                  from './store/reducers/';
 
 
 const composeEnhancers = composeWithDevTools({
@@ -16,7 +16,7 @@ const composeEnhancers = composeWithDevTools({
   });
   
 const store = createStore(reducer,composeEnhancers(
-    applyMiddleware(promise(),thunk, logger)
+    applyMiddleware(promise(),thunk /*, logger */ )
 ));
 
 

@@ -9,7 +9,6 @@ import Logout                         from './components/Auth/Logout';
 import Login                          from './components/Auth/Login'
 import * as actions                   from './store/actions/index' ;
 
-
 class App extends Component {
 
     constructor() {

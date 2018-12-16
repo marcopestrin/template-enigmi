@@ -1,4 +1,7 @@
 import React, { Component }           from 'react';
+import {connect}                      from 'react-redux';
+import * as actions                   from '../../store/actions';
+
 
 class LevelInfo extends Component {
 
@@ -10,4 +13,16 @@ class LevelInfo extends Component {
         return(<h1>tutto le informazioni del livello</h1>)
     }
 }
-export default LevelInfo;
+const mapStateToProps = state => {
+    return {
+
+
+    };
+}
+const mapDispatchToProps = dispatch => {
+    return {
+
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LevelInfo);

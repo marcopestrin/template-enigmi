@@ -12,6 +12,7 @@ class EnigmaPage extends Component {
       
     constructor(props){
         super(props);
+        //console.log(props);
     }
 
     componentDidMount() {
@@ -19,11 +20,15 @@ class EnigmaPage extends Component {
     }
 
     readUserData() {
+        /*
         fire.database().ref('enigmi/').once('value')
             .then(function(result){
-                //console.log("content of enigma",result.val());
+                //console.log("content of enigma",result.val()[1].description);
                 return result.val()
             });
+            */
+        this.props.loadLevel(this.props.userId);
+        console.log(this.props.description);
     }
 
     render(){
@@ -44,12 +49,15 @@ class EnigmaPage extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        authCheckState: () => dispatch(actions.authCheckState())
+        authCheckState: () => dispatch(actions.authCheckState()),
+        getLevel: () => dispatch(actions.getLevel()),
+        loadLevel:(id) => dispatch(actions.loadLevel(id))
     };
 }
 const mapStateToProps = state => {
     return {
-
+        userId:state.auth.user,
+        description:state.level.description
     }
 }
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(EnigmaPage));

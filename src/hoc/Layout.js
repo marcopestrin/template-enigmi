@@ -14,30 +14,10 @@ class Layout extends Component {
         this.logout = this.logout.bind(this);
         this.props.authCheckState();
         this.isAuthenticated();
-        //this.isAuthenticated = this.isAuthenticated.bind(this);
-        /*
-        if(!this.props.isAuthenticated) {
-            this.setState({authenticated: false });
-        }
-
-
-        fire.auth().onAuthStateChanged((user) => {
-            if (user) {
-              this.setState({ id: user.uid, authenticated: true });
-            } else {
-              this.setState({authenticated: false });
-            }
-        });
-        */
-    }
-
-    componentDidMount() {
-        console.log("pes: ",this.props.isAuthenticated);
     }
 
     logout() {
         this.props.history.push("/logout")
-        //DEVO RIMUOVERE IL FLAG NELLO STATO IN LOGOUT!!!
     }
 
     getCookieValue = (a) => {

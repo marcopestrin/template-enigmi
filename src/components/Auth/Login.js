@@ -12,7 +12,6 @@ class Login extends Component {
         this.isSignUp = true
         this.state = {
             isSignUp : false,
-
         };
     }
 

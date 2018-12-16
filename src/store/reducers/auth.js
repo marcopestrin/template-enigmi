@@ -16,7 +16,7 @@ const reducer = (state = initialState,action) => {
             return {...state, fetching:true};
 
         case actionTypes.AUTH_CHECK:
-            return {...state};
+            return {...state, user:localStorage.user};
 
         case actionTypes.AUTH_SUCCESS:
             return {...state, isAuthenticated:true, fetching:false, registrationSuccess:null, error:false};

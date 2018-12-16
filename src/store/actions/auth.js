@@ -117,7 +117,7 @@ export const logout = () =>{
     }
 }
 
-export const authCheckState = (isAuthenticated) => {
+export const authCheckState = (isAuthenticated,) => {
     return {
         isAuthenticated,
         type:actions.AUTH_CHECK
