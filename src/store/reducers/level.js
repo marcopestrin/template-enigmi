@@ -1,14 +1,7 @@
 import * as actionTypes from '../actions/actionType';
 
 const initialState = {
-    title:'',
-    solution:'',
-    password:'',
-    name:'',
-    level:'',
-    img:'',
-    difficulty:'',
-    description:''
+    level:''
 }
 
 const reducer = (state = initialState,action) => {
@@ -21,7 +14,7 @@ const reducer = (state = initialState,action) => {
             return {...state};
 
         case actionTypes.GET_LEVEL:
-            return {...state};
+            return {...state, level:action.level};
 
         case actionTypes.LOAD_LEVEL:
             return {...state};

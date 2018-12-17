@@ -21,7 +21,7 @@ export const getLevel = (level) => {
     }  
 }
 
-export const loadLevel = (identificativo) => {
+export const loadLevel = (identificativo = null) => {
     return dispatch => {
         fire.database().ref('user/').once('value')
             .then(function(result){ //load all the users

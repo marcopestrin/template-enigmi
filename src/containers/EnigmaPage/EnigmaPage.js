@@ -12,7 +12,6 @@ class EnigmaPage extends Component {
       
     constructor(props){
         super(props);
-        //console.log(props);
     }
 
     componentDidMount() {
@@ -20,23 +19,24 @@ class EnigmaPage extends Component {
     }
 
     readUserData() {
-        /*
-        fire.database().ref('enigmi/').once('value')
-            .then(function(result){
-                //console.log("content of enigma",result.val()[1].description);
-                return result.val()
-            });
-            */
         this.props.loadLevel(this.props.userId);
-        console.log(this.props.description);
     }
 
     render(){
         return (
             <div className={classes.EnigmaPage}>
-                start
+                <img src={this.props.level.img} />
+                {this.props.level.description}
+                <br />
+                {this.props.level.name}
                 <div className={classes.Header}>
-                    <div><LevelInfo readUserData={this.readUserData()}/></div>
+                    <div>
+                        <LevelInfo 
+                            difficulty={this.props.level.difficulty}
+                            level={this.props.level.level}
+                            readUserData={this.readUserData()}
+                        />
+                    </div>
                     <div><Password /></div>
                 </div>
                 <Enigma />
@@ -57,7 +57,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         userId:state.auth.user,
-        description:state.level.description
+        level:state.level.level
     }
 }
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(EnigmaPage));
