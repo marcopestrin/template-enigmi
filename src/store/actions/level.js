@@ -15,10 +15,17 @@ export const levelFail = (error) => {
 }
 
 export const getLevel = (level) => {
-    return {
-        level:level,
-        type:actions.GET_LEVEL
-    }  
+    if(localStorage.user != undefined) { //when I click LOGOUT I leave the level informations
+        return {
+            level:level,
+            type:actions.GET_LEVEL
+        }  
+    }else{
+        return {
+            level:"",
+            type:actions.GET_LEVEL
+        } 
+    }
 }
 
 export const loadLevel = (identificativo = null) => {
