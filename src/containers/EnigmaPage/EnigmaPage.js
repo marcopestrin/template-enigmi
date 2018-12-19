@@ -5,7 +5,7 @@ import classes                       from './EnigmaPage.css';
 import LevelInfo                     from '../../components/LevelInfo/LevelInfo';
 import Password                      from '../../components/Password/Password';
 import Enigma                        from '../../components/Enigma/Enigma';
-import fire                          from '../../config/Fire';
+import LoadingComponentSpinner       from '../../components/UI/Spinner/Spinner';
 import * as actions                  from '../../store/actions/index' ;
 
 class EnigmaPage extends Component {
@@ -16,25 +16,31 @@ class EnigmaPage extends Component {
 
     componentDidMount() {
         this.props.authCheckState();
-    }
-
-    readUserData() {
         this.props.loadLevel(this.props.userId);
     }
 
+    isDataReady() {
+        if(this.props.level)
+            return true;
+        return false;
+    }
+
+
     render(){
+        const { level } = this.props;
+        if (!level) { return <LoadingComponentSpinner />; } // this will render only when level attr is not set, otherwise will render your `LevelInfo` component
+        
         return (
             <div className={classes.EnigmaPage}>
-                <img src={this.props.level.img} />
-                {this.props.level.description}
-                <br />
+                <img src={this.props.level.img} /><br />
+                {this.props.level.description}<br />
+                {this.props.level.difficulty}<br />
                 {this.props.level.name}
                 <div className={classes.Header}>
-                    <div>
+                    <div>                        
                         <LevelInfo 
                             difficulty={this.props.level.difficulty}
-                            level={this.props.level.level}
-                            readUserData={this.readUserData()}
+                            levelNumber={this.props.level.levelNumber}
                         />
                     </div>
                     <div><Password /></div>

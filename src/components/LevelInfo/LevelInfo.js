@@ -10,7 +10,12 @@ class LevelInfo extends Component {
     }
 
     render() {
-        return(<h1>tutto le informazioni del livello</h1>)
+        return(
+            <div>
+                <p><strong>Difficulty</strong>: {this.props.difficulty}</p>
+                <p><strong>Level</strong>: {this.props.levelNumber}</p>
+            </div>
+        )
     }
 }
 const mapStateToProps = state => {
