@@ -28,8 +28,7 @@ export const getLevel = (level) => {
     }
 }
 
-export const submitPassword = (password) => {
-    //here add logic !!!
+export const submitPassword = (password,levelNumber) => {
     return {
         type:actions.CHECK_PASSWORD_LEVEL
     }

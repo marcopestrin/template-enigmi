@@ -16,7 +16,7 @@ class Password extends Component {
 
     submitPassword=(e)=>{   
         e.preventDefault();
-        this.props.submitPassword(this.state.password)
+        this.props.submitPassword(this.state.password, this.props.levelNumber)
     }
 
     handleChange(e) {
@@ -48,7 +48,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        submitPassword: (password) =>  dispatch(actions.submitPassword(password))
+        submitPassword: (password,levelNumber) =>  dispatch(actions.submitPassword(password,levelNumber))
     };
 }
 
