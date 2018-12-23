@@ -28,6 +28,13 @@ export const getLevel = (level) => {
     }
 }
 
+export const submitPassword = (password) => {
+    //here add logic !!!
+    return {
+        type:actions.CHECK_PASSWORD_LEVEL
+    }
+}
+
 export const loadLevel = (identificativo = null) => {
     return dispatch => {
         fire.database().ref('user/').once('value')

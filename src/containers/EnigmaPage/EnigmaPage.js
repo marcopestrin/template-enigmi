@@ -25,10 +25,23 @@ class EnigmaPage extends Component {
         return false;
     }
 
+    getCookieValue = (a) => {
+        var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+        return b ? b.pop() : '';
+    }
 
     render(){
+        if(!this.getCookieValue("authEnigmi")) {
+            //here there are a vulnerability !!!! the users can change the cookie value!
+            return(
+                <p>To play you must log in</p>
+            ) 
+        }
         const { level } = this.props;
-        if (!level) { return <LoadingComponentSpinner />; } // this will render only when level attr is not set, otherwise will render your `LevelInfo` component
+
+        if (!level) { 
+            return <LoadingComponentSpinner />; 
+        }
         
         return (
             <div className={classes.EnigmaPage}>
@@ -37,13 +50,13 @@ class EnigmaPage extends Component {
                 {this.props.level.difficulty}<br />
                 {this.props.level.name}
                 <div className={classes.Header}>
-                    <div>                        
-                        <LevelInfo 
-                            difficulty={this.props.level.difficulty}
-                            levelNumber={this.props.level.levelNumber}
-                        />
-                    </div>
-                    <div><Password /></div>
+                    <LevelInfo 
+                        difficulty={this.props.level.difficulty}
+                        levelNumber={this.props.level.levelNumber}
+                    />
+                    <Password
+                        levelNumber={this.props.level.levelNumber}
+                    />
                 </div>
                 <Enigma />
                 finish

@@ -1,2 +1,2 @@
 export {authentication,createNewProfile,logout,authCheckState} from './auth';
-export {getLevel, loadLevel} from './level';
+export {getLevel, loadLevel, submitPassword} from './level';

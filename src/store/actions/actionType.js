@@ -2,12 +2,16 @@ export const AUTH_LOADING = 'AUTH_LOADING';
 export const AUTH_CHECK = 'AUTH_CHECK';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
+
 export const REGISTRATION_LOADING = 'REGISTRATION_LOADING';
 export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
 export const REGISTRATION_FAIL = 'REGISTRATION_FAIL';
+
 export const LOGOUT = 'LOGOUT';
+
 export const GET_LEVEL = 'GET_LEVEL';
 export const LEVEL_SUCCESS = 'LEVEL_SUCCESS';
 export const LEVEL_FAIL = 'LEVEL_FAIL';
 export const LOAD_LEVEL = 'LOAD_LEVEL';
+export const CHECK_PASSWORD_LEVEL = 'CHECK_PASSWORD_LEVEL';
 

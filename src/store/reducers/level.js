@@ -18,6 +18,9 @@ const reducer = (state = initialState,action) => {
 
         case actionTypes.LOAD_LEVEL:
             return {...state};
+            
+        case actionTypes.CHECK_PASSWORD_LEVEL:
+            return {...state};
 
         default:
             return state;

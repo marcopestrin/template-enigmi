@@ -1,27 +1,56 @@
 import React, { Component }           from 'react';
+import {connect}                      from 'react-redux';
 import Aux                            from "../../hoc/Aux";
 import Button                         from '../UI/Button/Button';
-
+import * as actions                   from '../../store/actions';
 
 class Password extends Component {
 
-    submitPassword(e) {
+    constructor(props){
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            password: ''
+        }
+    }
+
+    submitPassword=(e)=>{   
         e.preventDefault();
-        console.log("invio passwordddd!!");
+        this.props.submitPassword(this.state.password)
+    }
+
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     render() {        
         return(
             <Aux>
-                <input placeholder="Insert here the password for the next level" value="" name="" />
-                <Button 
-                    clicked={this.submitPassword}
-                    btnType="classic">
-                    TRY!
-                </Button>
+                <form>
+                    <label>Insert here the password for the next level</label>
+                    <input value={this.state.password} type="text" onChange={this.handleChange} name="password" class="form-control" id="password" aria-describedby="password" placeholder="password" />
+
+                    <Button 
+                        clicked={this.submitPassword}
+                        btnType="classic">
+                        Submit password
+                    </Button>
+                </form>
             </Aux>
         );
     }
 
 }
-export default Password;
+const mapStateToProps = state => {
+    return {
+
+    };
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        submitPassword: (password) =>  dispatch(actions.submitPassword(password))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Password);
+
