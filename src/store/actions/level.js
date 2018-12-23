@@ -28,10 +28,19 @@ export const getLevel = (level) => {
     }
 }
 
-export const submitPassword = (password,levelNumber) => {
-    return {
-        type:actions.CHECK_PASSWORD_LEVEL
-    }
+export const submitPassword = (passwordInput,levelNumber) => {
+    fire.database().ref('enigmi/').once('value')
+        .then(function(result){
+            if(result.val()[levelNumber].password == passwordInput){
+                console.log(true)
+            }else{
+                console.log(false);
+            }
+
+        });
+        return {
+            type:actions.CHECK_PASSWORD_LEVEL
+        }
 }
 
 export const loadLevel = (identificativo = null) => {
