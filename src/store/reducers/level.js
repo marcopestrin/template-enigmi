@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionType';
 
 const initialState = {
-    level:''
+    level:""
 }
 
 const reducer = (state = initialState,action) => {
@@ -16,11 +16,11 @@ const reducer = (state = initialState,action) => {
         case actionTypes.GET_LEVEL:
             return {...state, level:action.level};
 
-        case actionTypes.LOAD_LEVEL:
+        case actionTypes.FALSE_PASSWORD_LEVEL:
             return {...state};
-            
-        case actionTypes.CHECK_PASSWORD_LEVEL:
-            return {...state};
+
+        case actionTypes.TRUE_PASSWORD_LEVEL:
+            return {...state}
 
         default:
             return state;

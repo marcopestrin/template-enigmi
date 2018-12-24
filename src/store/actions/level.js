@@ -28,19 +28,62 @@ export const getLevel = (level) => {
     }
 }
 
-export const submitPassword = (passwordInput,levelNumber) => {
-    fire.database().ref('enigmi/').once('value')
-        .then(function(result){
-            if(result.val()[levelNumber].password == passwordInput){
-                console.log(true)
-            }else{
-                console.log(false);
-            }
+export const passwordCorrect = (levelNumber) => {
+    console.log("go to the next level");
 
+
+
+    fire.database().ref('user/').once('value')
+        .then(function(result){ //load all the users
+            var obj = result.val();
+            Object.keys(obj).forEach((key)=> { //cycling all the users
+
+
+
+
+                if (obj[key].id == localStorage.getItem('user')){ //I take the user I'm logged
+                    console.log("trovato");
+                    var updates = {};
+                    updates['/user/' + key + '/' +  'currentLevel'] = levelNumber+1;
+                    fire.database().ref().update(updates)
+
+
+        
+                }
+
+
+
+
+            });
         });
-        return {
-            type:actions.CHECK_PASSWORD_LEVEL
-        }
+
+    return {
+        level:undefined,
+        type:actions.TRUE_PASSWORD_LEVEL
+    }
+}
+
+export const passwordWrong = () => {
+    console.log("stay here!!");
+    return {
+        level:undefined,
+        type:actions.FALSE_PASSWORD_LEVEL
+    }
+}
+
+
+export const submitPassword = (passwordInput,levelNumber) => {
+    return dispatch => {
+        fire.database().ref('enigmi/').once('value')
+            .then(function(result){
+                if(result.val()[levelNumber].password == passwordInput){
+                    dispatch(passwordCorrect(levelNumber));
+                }else{
+                    dispatch(passwordWrong());
+                }
+            });
+
+    }
 }
 
 export const loadLevel = (identificativo = null) => {
@@ -61,8 +104,5 @@ export const loadLevel = (identificativo = null) => {
                     }
                 });
             });
-        return {
-            type:actions.LOAD_LEVEL
-        }  
     }
 }

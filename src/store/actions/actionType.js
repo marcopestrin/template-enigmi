@@ -12,6 +12,8 @@ export const LOGOUT = 'LOGOUT';
 export const GET_LEVEL = 'GET_LEVEL';
 export const LEVEL_SUCCESS = 'LEVEL_SUCCESS';
 export const LEVEL_FAIL = 'LEVEL_FAIL';
-export const LOAD_LEVEL = 'LOAD_LEVEL';
-export const CHECK_PASSWORD_LEVEL = 'CHECK_PASSWORD_LEVEL';
+export const FALSE_PASSWORD_LEVEL = 'FALSE_PASSWORD_LEVEL';
+export const TRUE_PASSWORD_LEVEL = 'TRUE_PASSWORD_LEVEL';
+
+
 
