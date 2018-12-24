@@ -30,30 +30,16 @@ export const getLevel = (level) => {
 
 export const passwordCorrect = (levelNumber) => {
     console.log("go to the next level");
-
-
-
     fire.database().ref('user/').once('value')
         .then(function(result){ //load all the users
             var obj = result.val();
             Object.keys(obj).forEach((key)=> { //cycling all the users
-
-
-
-
                 if (obj[key].id == localStorage.getItem('user')){ //I take the user I'm logged
-                    console.log("trovato");
-                    var updates = {};
-                    updates['/user/' + key + '/' +  'currentLevel'] = levelNumber+1;
-                    fire.database().ref().update(updates)
-
-
-        
+                    console.log("found!");
+                    var updates = {}; //object empty
+                    updates['/user/' + key + '/' +  'currentLevel'] = levelNumber+1; // update data into database
+                    fire.database().ref().update(updates) //send data
                 }
-
-
-
-
             });
         });
 
