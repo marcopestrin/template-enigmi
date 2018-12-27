@@ -45,10 +45,7 @@ class EnigmaPage extends Component {
         
         return (
             <div className={classes.EnigmaPage}>
-                <img src={this.props.level.img} /><br />
-                {this.props.level.description}<br />
-                {this.props.level.difficulty}<br />
-                {this.props.level.name}
+start
                 <div className={classes.Header}>
                     <LevelInfo 
                         difficulty={this.props.level.difficulty}
@@ -58,7 +55,11 @@ class EnigmaPage extends Component {
                         levelNumber={this.props.level.levelNumber}
                     />
                 </div>
-                <Enigma />
+                <Enigma 
+                    nameEnigma = {this.props.level.name}
+                    imgEnigma = {this.props.level.img}
+                    contentEnigma={this.props.level.description}
+                    />
                 finish
             </div>
         )

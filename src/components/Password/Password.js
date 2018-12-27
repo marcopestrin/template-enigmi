@@ -16,7 +16,8 @@ class Password extends Component {
 
     submitPassword=(e)=>{   
         e.preventDefault();
-        this.props.submitPassword(this.state.password, this.props.levelNumber)
+        this.props.submitPassword(this.state.password, this.props.levelNumber);
+        this.forceUpdate() //not working!!
     }
 
     handleChange(e) {
