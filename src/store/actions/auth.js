@@ -90,6 +90,9 @@ export const authentication = (email,password) =>{
                 var expires = "expires="+ d.toUTCString();
                 document.cookie ="authEnigmi=" + true + ";" + expires + ";path=/";
 
+                //save into local storage the utente's email
+                localStorage.setItem('user_email', result.user.email);
+
                 dispatch(loginSuccess());
             })
             .catch((error) => {
@@ -112,6 +115,8 @@ export const logout = () =>{
 
         //remove cookie
         document.cookie = 'authEnigmi=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+        localStorage.removeItem("user_email");
 
         dispatch(logoutSuccess());
     }

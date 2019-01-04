@@ -34,7 +34,7 @@ class Layout extends Component {
 
     render() {
         var auth;
-        auth = <NavigationItems isAuthenticated={this.isAuthenticated()} />;
+        auth = <NavigationItems email={localStorage.getItem("user_email")} isAuthenticated={this.isAuthenticated()} />;
         return(
             <Aux>
                 {auth}
