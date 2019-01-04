@@ -39,6 +39,11 @@ export const passwordCorrect = (levelNumber) => {
                     var updates = {}; //object empty
                     updates['/user/' + key + '/' +  'currentLevel'] = levelNumber+1; // update data into database
                     fire.database().ref().update(updates) //send data
+
+                    console.log("to fix!!!");
+                    window.location.reload(); //This is not a good pattern!!
+                    console.log("to fix!!!");
+                    
                 }
             });
         });
