@@ -34,7 +34,7 @@ class EnigmaPage extends Component {
         if(!this.getCookieValue("authEnigmi")) {
             //here there are a vulnerability !!!! the users can change the cookie value!
             return(
-                <p>To play you must log in</p>
+                <p className="text-center">To play you must log in</p>
             ) 
         }
         const { level } = this.props;
@@ -44,7 +44,7 @@ class EnigmaPage extends Component {
         }
         
         return (
-            <div className={classes.EnigmaPage}>
+            <div className="container">
                 <Enigma 
                     nameEnigma = {this.props.level.name}
                     imgEnigma = {this.props.level.img}

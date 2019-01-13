@@ -39,25 +39,35 @@ class Login extends Component {
   render() {
     return (
         <Aux>
-            <h1>{this.state.isSignUp ? 'Registration' : 'Login'}</h1>
-            <form>
-                <label for="email1">Email address</label>
-                <input value={this.state.email} onChange={this.handleChange} type="email" name="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter email" />
-                
-                <label for="password1">Password</label>
-                <input value={this.state.password} onChange={this.handleChange} type="password" name="password" id="password1" placeholder="Password" />
+            <div className="container">
+                <h1>{this.state.isSignUp ? 'Registration' : 'Login'}</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="email1">Email address</label>
+                        <input value={this.state.email} onChange={this.handleChange} type="email" name="email" className="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter email" />
+                    </div>
 
-                <Button 
-                    clicked={this.state.isSignUp ? this.submitHandlerRegister : this.submitHandlerAuthentication}
-                    btnType="classic">
-                    SEND MODULE
-                </Button>
-                <Button 
-                    clicked={this.switchAuthModeHandler}
-                    btnType="classic">
-                    SWITCH TO {!this.state.isSignUp ? 'Registration' : 'Login'}
-                </Button>
-            </form>
+                    <div class="form-group">
+                        <label for="password1">Password</label>
+                        <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className="form-control" id="password1" placeholder="Password" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <Button 
+                            classes="btn btn-primary margin-10"
+                            clicked={this.state.isSignUp ? this.submitHandlerRegister : this.submitHandlerAuthentication}
+                            btnType="classic">
+                            SEND MODULE
+                        </Button>
+                        <Button 
+                            classes="btn btn-secondary margin-10"
+                            clicked={this.switchAuthModeHandler}
+                            btnType="classic">
+                            SWITCH TO {!this.state.isSignUp ? 'Registration' : 'Login'}
+                        </Button>
+                    </div>
+                </form>
+            </div>
         </Aux>
     );
   }

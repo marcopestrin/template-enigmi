@@ -6,6 +6,7 @@
   "dependencies": {
     "@version/react-router-v3": "^1.0.0",
     "axios": "^0.18.0",
+    "bootstrap": "^4.2.1",
     "firebase": "^5.5.9",
     "history": "^4.7.2",
     "logrocket": "^0.6.17",

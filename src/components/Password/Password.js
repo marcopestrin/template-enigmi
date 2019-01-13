@@ -2,6 +2,7 @@ import React, { Component }           from 'react';
 import {connect}                      from 'react-redux';
 import Aux                            from "../../hoc/Aux";
 import Button                         from '../UI/Button/Button';
+import classes                        from './Password.css';
 import * as actions                   from '../../store/actions';
 
 class Password extends Component {
@@ -33,15 +34,14 @@ class Password extends Component {
     render() {        
         return(
             <Aux>
-                <form className="form-inline">
-                    <div className="form-group">
+                <form >
+                    <div className="PasswordInput">
                         <input 
                             value={this.state.password}
                             type="text"
                             onChange={this.handleChange}
                             name="password"
-                            class="form-control"
-                            id="password"
+                            id="passwordInput"
                             aria-describedby="password"
                             placeholder="Insert here the password for the next level" />
                         <Button 
