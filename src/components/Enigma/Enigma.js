@@ -12,16 +12,19 @@ class Enigma extends Component {
     render() {
         return(
             <div className="enigmaContent">
-                <strong>
-                    {this.props.nameEnigma}
-                </strong>
-                <br />
-                <br />
-                {this.props.imgEnigma}
-                <br />
-                <br />
 
-                {this.props.contentEnigma}
+                <blockquote className="blockquote text-center enigma-title">
+                    {this.props.nameEnigma}
+                </blockquote>
+
+                <div className="text-center enigma-image">
+                    <img src={this.props.imgEnigma} />
+                </div>
+
+                <div className="enigma-content text-center">
+                    {this.props.contentEnigma}
+                </div>
+
             </div>
         )
     }

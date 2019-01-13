@@ -9,6 +9,8 @@ import thunk                    from 'redux-thunk';
 import promise                  from 'redux-promise-middleware'
 import App                      from './App';
 import reducer                  from './store/reducers/';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const composeEnhancers = composeWithDevTools({

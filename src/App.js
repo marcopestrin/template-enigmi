@@ -47,7 +47,9 @@ class App extends Component {
         return(
             <div>
                 <Aux>
-                    {routes}
+                    <div className="container" id="mainDiv">
+                        {routes}
+                    </div>
                 </Aux>
             </div>
         )

@@ -9,12 +9,20 @@ class NavigationItems extends Component {
         const email = "you are logged as "+this.props.email;
         return(
             <Aux>
-                <p>
-                    {this.props.email ? email : empty }            
-                </p>
-                <ul>
-                    {this.props.isAuthenticated ? <NavigationItem link="/logout">Logout</NavigationItem> : <NavigationItem link="/auth">Authenticate</NavigationItem> }
-                </ul>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">
+                                    {this.props.isAuthenticated ? <NavigationItem link="/logout">Logout</NavigationItem> : <NavigationItem link="/auth">Authenticate</NavigationItem> }
+                                </a>
+                            </li>
+                        </ul>
+                        <span class="navbar-text">
+                            {this.props.email ? email : empty }   
+                        </span>
+                    </div>
+                </nav>
             </Aux>
         )
     };

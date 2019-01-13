@@ -1,5 +1,6 @@
 import React, { Component }           from 'react';
 import {connect}                      from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class LevelInfo extends Component {
@@ -11,8 +12,12 @@ class LevelInfo extends Component {
     render() {
         return(
             <div>
-                <p><strong>Difficulty</strong>: {this.props.difficulty}</p>
-                <p><strong>Level</strong>: {this.props.levelNumber}</p>
+                <span className={this.props.classes}>
+                    Difficulty: <strong>{this.props.difficulty}</strong>
+                </span>
+                <span className={this.props.classes}>
+                    Level: <strong>{this.props.levelNumber}</strong>
+                </span>
             </div>
         )
     }

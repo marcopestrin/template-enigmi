@@ -37,10 +37,14 @@ class Layout extends Component {
         auth = <NavigationItems email={localStorage.getItem("user_email")} isAuthenticated={this.isAuthenticated()} />;
         return(
             <Aux>
-                {auth}
-                <h2>layout</h2>
-                <EnigmaPage user={this.state.uid}/>
-                <h2>layout</h2>
+                <div className="container">
+                    <div className="row">
+                        <div class="col-md-10 offset-md-1">
+                            {auth}
+                            <EnigmaPage user={this.state.uid}/>
+                        </div>
+                    </div>
+                </div>
             </Aux>
         )
     }

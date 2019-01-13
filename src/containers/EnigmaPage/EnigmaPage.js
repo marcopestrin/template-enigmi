@@ -45,22 +45,19 @@ class EnigmaPage extends Component {
         
         return (
             <div className={classes.EnigmaPage}>
-start
-                <div className={classes.Header}>
-                    <LevelInfo 
-                        difficulty={this.props.level.difficulty}
-                        levelNumber={this.props.level.levelNumber}
-                    />
-                    <Password
-                        levelNumber={this.props.level.levelNumber}
-                    />
-                </div>
                 <Enigma 
                     nameEnigma = {this.props.level.name}
                     imgEnigma = {this.props.level.img}
                     contentEnigma={this.props.level.description}
                     />
-                finish
+                <Password
+                    levelNumber={this.props.level.levelNumber}
+                />
+                <LevelInfo 
+                    classes='badge badge-primary'
+                    difficulty={this.props.level.difficulty}
+                    levelNumber={this.props.level.levelNumber}
+                />
             </div>
         )
     }
