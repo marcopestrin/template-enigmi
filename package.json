@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@version/react-router-v3": "^1.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.2.1",
     "firebase": "^5.5.9",
     "history": "^4.7.2",
